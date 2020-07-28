@@ -2353,17 +2353,19 @@
               }
             },
             {
-              "ActivityId": "4gvf28y8zkw23xfewxt4tyamdv",
-              "Name": "ContentCreatedEvent",
-              "X": 30,
-              "Y": 450,
+              "ActivityId": "4e1ap5cd1abqz1429c56fc3sd2",
+              "Name": "CreateContentTask",
+              "X": 370,
+              "Y": 220,
               "IsStart": false,
               "Properties": {
-                "ContentTypeFilter": [
-                  "Subscriber"
-                ],
+                "ContentType": "Subscriber",
+                "Publish": true,
+                "ContentProperties": {
+                  "Expression": "{\r\n  \"FirstName\": {\r\n    \"Text\": \"{{ Subscriber.FirstName}}\"\r\n  },\r\n  \"LastName\": {\r\n    \"Text\": \"{{ Subscriber.LastName}}\"\r\n  },\r\n  \"Email\": {\r\n    \"Text\": \"{{ Subscriber.EMail}}\"\r\n  }\r\n}\r\n"
+                },
                 "ActivityMetadata": {
-                  "Title": "Content Create Event"
+                  "Title": "Create Content Task"
                 }
               }
             }
@@ -2379,11 +2381,10 @@
               "Id": 0,
               "SourceActivityId": "4hgdtej7gp3e2vdy88e2zrj0np",
               "SourceOutcomeName": "Done",
-              "DestinationActivityId": "4gvf28y8zkw23xfewxt4tyamdv"
+              "DestinationActivityId": "4e1ap5cd1abqz1429c56fc3sd2"
             }
           ]
-        }
-      ]
+        }      ]
     },
     {
       "name": "Settings",
