@@ -11,7 +11,7 @@
 
   // The variables are evaluated the first time they are accessed, and reused across steps
   "variables": {
-    "subscriptionContentItemId": "[js:uuid()]",
+    "subscriptionContentItemId": "462m1ps5kkzkp2k5da5pfhh2ww",
     "blogContentItemId": "[js:uuid()]",
     "menuContentItemId": "[js:uuid()]",
     "tagsContentItemId": "[js:uuid()]",
@@ -293,20 +293,6 @@
               "Settings": {
                 "ContentTypePartSettings": {
                   "Position": "0"
-                }
-              }
-            },
-            {
-              "PartName": "AutoroutePart",
-              "Name": "AutoroutePart",
-              "Settings": {
-                "ContentTypePartSettings": {
-                  "Position": "1"
-                },
-                "AutoroutePartSettings": {
-                  "AllowCustomPath": true,
-                  "Pattern": "{{ Model.ContentItem | container | display_text | slugify }}/{{ Model.ContentItem | display_text | slugify }}",
-                  "ShowHomepageOption": false
                 }
               }
             },
@@ -1589,6 +1575,30 @@
         {
           "ContentItemId": "[js: uuid()]",
           "ContentType": "Article",
+          "DisplayText": "Subscribed",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "AutoroutePart": {
+            "Path": "subscribed",
+            "SetHomepage": false
+          },
+          "HtmlBodyPart": {
+            "Html": "<p>Thank you for subscribing. You will now be receiving our weekly newsletter.</p>"
+          },
+          "TitlePart": {
+            "Title": "Subscribed"
+          },
+          "Article": {
+            "Subtitle": {
+              "Text": "Thank You for Subscribing"
+            }
+          }
+        },
+        {
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "Article",
           "DisplayText": "Not Authorized",
           "Latest": true,
           "Published": true,
@@ -2331,42 +2341,42 @@
                   "Title": "Subscribe Request Event"
                 },
                 "HttpMethod": "POST",
-                "Url": "/workflows/Invoke?token=CfDJ8Hzc28uDtJxEhoDW1tYRUhKTK4cWaJuN0wLv5vUjcF3FkcRsIE_9diOysqstFbq4m1c0EZbxb7PCLvn1jA7wOyCT8dK5HRMXHuTv8a4HKJcBo9YE6ZrK1fOraTBVe6AhrvjFPYqSmwZ3BBIA1zAwq1AK2RYT9iIcofucCYgk_P_nclwEe2IZsPg1_lS3ffGwO5wZdyYcgCmR8zl4QiiQSUDCfRTwX8JhBLvRF0UtgVQn",
+                "Url": "/workflows/Invoke?token=CfDJ8JmvH6APCDFHsp7rD4dJLgIoRLJ82sOfNdxcR1cNrGdIekgAB2r0Np3_jbCpIZULYfCMgMRwLqppisDKb0RUKJuZEQeNvU-NBuu7Lw-rh0fhYBnEI3dy74RxdSfOcnjvVf4ndrP8DKf_84DNopklIncf0f7qltQE4p0cGQfCfXDk6xTjBjJQaCUpij--fdcw8RCXh3hJqL6A8-lvYryP-MAHmChanFNKY8hRWY7LgEpT",
                 "ValidateAntiforgeryToken": true,
                 "TokenLifeSpan": 0
               }
             },
             {
-              "ActivityId": "4hgdtej7gp3e2vdy88e2zrj0np",
-              "Name": "SetPropertyTask",
-              "X": 80,
-              "Y": 210,
-              "IsStart": false,
-              "Properties": {
-                "ActivityMetadata": {
-                  "Title": "Set Property Task"
-                },
-                "PropertyName": "Subscriber",
-                "Value": {
-                  "Expression": "JSON.parse(readBody())"
-                }
-              }
-            },
-            {
               "ActivityId": "4e1ap5cd1abqz1429c56fc3sd2",
               "Name": "CreateContentTask",
-              "X": 370,
-              "Y": 220,
+              "X": 390,
+              "Y": 10,
               "IsStart": false,
               "Properties": {
                 "ContentType": "Subscriber",
                 "Publish": true,
                 "ContentProperties": {
-                  "Expression": "{\r\n  \"FirstName\": {\r\n    \"Text\": \"{{ Subscriber.FirstName}}\"\r\n  },\r\n  \"LastName\": {\r\n    \"Text\": \"{{ Subscriber.LastName}}\"\r\n  },\r\n  \"Email\": {\r\n    \"Text\": \"{{ Subscriber.EMail}}\"\r\n  }\r\n}\r\n"
+                  "Expression": "{\r\n  \"TitlePart\": {\r\n     \"Title\": \"{{ Request.Form.firstName }} {{ Request.Form.lastName }}\"\r\n  },\r\n  \"DisplayText\": \"{{ Request.Form.firstName }} {{ Request.Form.lastName }}\",\r\n  \"Subscriber\": {\r\n     \"FirstName\": {\r\n       \"Text\": \"{{ Request.Form.firstName }}\"\r\n     },\r\n     \"LastName\": {\r\n        \"Text\": \"{{ Request.Form.lastName }}\"\r\n     },\r\n     \"Email\": {\r\n       \"Text\": \"{{ Request.Form.email }}\"\r\n     }\r\n   },\r\n   \"ContainedPart\": {\r\n     \"ListContentItemId\": \"462m1ps5kkzkp2k5da5pfhh2ww\"\r\n   }\r\n}"
                 },
                 "ActivityMetadata": {
                   "Title": "Create Content Task"
                 }
+              }
+            },
+            {
+              "ActivityId": "4p4yv9hyrmfvg4mbnyaz05whcx",
+              "Name": "HttpRedirectTask",
+              "X": 730,
+              "Y": 10,
+              "IsStart": false,
+              "Properties": {
+                "ActivityMetadata": {
+                  "Title": "Subscribed"
+                },
+                "Location": {
+                  "Expression": "/subscribed"
+                },
+                "Permanent": false
               }
             }
           ],
@@ -2375,16 +2385,17 @@
               "Id": 0,
               "SourceActivityId": "4pt6qkjr50th52ss34h8sq4dm6",
               "SourceOutcomeName": "Done",
-              "DestinationActivityId": "4hgdtej7gp3e2vdy88e2zrj0np"
+              "DestinationActivityId": "4e1ap5cd1abqz1429c56fc3sd2"
             },
             {
               "Id": 0,
-              "SourceActivityId": "4hgdtej7gp3e2vdy88e2zrj0np",
+              "SourceActivityId": "4e1ap5cd1abqz1429c56fc3sd2",
               "SourceOutcomeName": "Done",
-              "DestinationActivityId": "4e1ap5cd1abqz1429c56fc3sd2"
+              "DestinationActivityId": "4p4yv9hyrmfvg4mbnyaz05whcx"
             }
           ]
-        }      ]
+        }
+       ]
     },
     {
       "name": "Settings",
