@@ -12,6 +12,7 @@
   // The variables are evaluated the first time they are accessed, and reused across steps
   "variables": {
     "subscriptionContentItemId": "462m1ps5kkzkp2k5da5pfhh2ww",
+    "messagesContentItemId": "4jj8jr3wyat5h7f8s4dvn052db",
     "blogContentItemId": "[js:uuid()]",
     "menuContentItemId": "[js:uuid()]",
     "tagsContentItemId": "[js:uuid()]",
@@ -438,6 +439,117 @@
                   "PageSize": 10,
                   "ContainedContentTypes": [
                     "Subscriber"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Message",
+          "DisplayName": "Message",
+          "Hidden": false,
+          "Settings": {
+            "ContentTypeSettings": {
+              "Draftable": true,
+              "Versionable": true
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            },
+            {
+              "PartName": "Message",
+              "Name": "Message",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "3"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Messages",
+          "DisplayName": "Messages",
+          "Hidden": false,
+          "Settings": {
+            "ContentTypeSettings": {
+              "Creatable": true,
+              "Draftable": true,
+              "Versionable": true,
+              "Listable": true,
+              "Securable": true
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            },
+            {
+              "PartName": "AutoroutePart",
+              "Name": "AutoroutePart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "1"
+                },
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "AutoroutePartSettings": {
+                  "AllowCustomPath": true,
+                  "Pattern": "{{ Model.ContentItem | display_text | slugify }}",
+                  "ShowHomepageOption": true
+                }
+              }
+            },
+            {
+              "PartName": "Messages",
+              "Name": "Messages",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "3"
+                }
+              }
+            },
+            {
+              "PartName": "HtmlBodyPart",
+              "Name": "HtmlBodyPart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "2"
+                }
+              }
+            },
+            {
+              "PartName": "ListPart",
+              "Name": "ListPart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "4"
+                },
+                "ListPartSettings": {
+                  "PageSize": 10,
+                  "ContainedContentTypes": [
+                    "Message"
                   ]
                 }
               }
@@ -1037,6 +1149,41 @@
           ]
         },
         {
+          "Name": "Message",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FullName": "TextField",
+              "Name": "FullName",
+              "Settings": {
+                "ContentPartFieldSettings": {
+                  "DisplayName": "FullName",
+                  "Position": "0"
+                },
+                "TextFieldSettings": {
+                  "Required": true
+                },
+                "ContentIndexSettings": {}
+              }
+            },
+            {
+              "FieldName": "TextField",
+              "Name": "Email",
+              "Settings": {
+                "ContentPartFieldSettings": {
+                  "DisplayName": "Email",
+                  "Editor": "Email",
+                  "Position": "2"
+                },
+                "TextFieldSettings": {
+                  "Required": true
+                },
+                "ContentIndexSettings": {}
+              }
+            }
+          ]
+        },
+        {
           "Name": "Article",
           "Settings": {},
           "ContentPartFieldDefinitionRecords": [
@@ -1472,6 +1619,32 @@
           }
         },
         {
+          "ContentType": "Messages",
+          "ContentItemId": "[js: variables('messagesContentItemId')]",
+          "DisplayText": "Messages",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": {
+            "Title": "Messages"
+          },
+          "HtmlBodyPart": {
+            "Html": "These are your messages"
+          },
+          "AutoroutePart": {
+            "Path": "messages"
+          },
+          "ListPart": {},
+          "Messages": {
+            "Image": {
+              "Paths": [
+                "home-bg.jpg"
+              ]
+            }
+          }
+        },
+        {
           "ContentType": "Blog",
           "ContentItemId": "[js: variables('blogContentItemId')]",
           "DisplayText": "Blog",
@@ -1740,7 +1913,7 @@
                       "ContentItemId": "4v2zn39myvc9v7knjjygez48db",
                       "ContentItemVersionId": null,
                       "ContentType": "Input",
-                      "DisplayText": "Name",
+                      "DisplayText": "Full Name",
                       "Latest": false,
                       "Published": false,
                       "PublishedUtc": null,
@@ -1748,7 +1921,7 @@
                       "Owner": null,
                       "Author": "admin",
                       "FormInputElementPart": {
-                        "Name": "Name"
+                        "Name": "FullName"
                       },
                       "FormElementPart": {
                         "Id": null
@@ -1756,7 +1929,7 @@
                       "InputPart": {
                         "Type": "text",
                         "DefaultValue": null,
-                        "Placeholder": "Enter Name"
+                        "Placeholder": "Enter Full Name"
                       },
                       "FlowMetadata": {
                         "Alignment": 3,
@@ -1990,7 +2163,7 @@
       "data": [
         {
           "Id": "031effaceb7645a2b8a6b80603dbfc22",
-          "Name": "Admin menu from blog recipe",
+          "Name": "Admin menu from Materila Design recipe",
           "Enabled": true,
           "MenuItems": [
             {
@@ -1999,6 +2172,27 @@
               "LinkUrl": "[js: 'Admin/Contents/ContentItems/' +  variables('subscriptionContentItemId') + '/Display']",
               "IconClass": "fa fa-list",
               "UniqueId": "86fb03852e8146dcae263b4766e22cb9",
+              "Enabled": true,
+              "Text": null,
+              "Id": null,
+              "Href": null,
+              "Url": null,
+              "Position": null,
+              "LinkToFirstChild": true,
+              "LocalNav": false,
+              "Culture": null,
+              "Resource": null,
+              "Items": [],
+              "RouteValues": null,
+              "Permissions": [],
+              "Classes": []
+            },
+            {
+              "$type": "OrchardCore.AdminMenu.AdminNodes.LinkAdminNode, OrchardCore.AdminMenu",
+              "LinkText": "Messages",
+              "LinkUrl": "[js: 'Admin/Contents/ContentItems/' +  variables('messagesContentItemId') + '/Display']",
+              "IconClass": "fa fa-sticky-note",
+              "UniqueId": "a6fb03852e8156dcae263b4766e22cb9",
               "Enabled": true,
               "Text": null,
               "Id": null,
@@ -2194,7 +2388,7 @@
                   "Title": "Validate Form Fields"
                 },
                 "Forks": [
-                  "Validate Name",
+                  "Validate FullName",
                   "Validate Email",
                   "Validate Message"
                 ]
@@ -2270,7 +2464,7 @@
             {
               "ActivityId": "47j30tb53gecc2yqewbx3x8pn4",
               "Name": "EmailTask",
-              "X": 810,
+              "X": 1070,
               "Y": 470,
               "IsStart": false,
               "Properties": {
@@ -2284,11 +2478,17 @@
                   "Expression": "New Message"
                 },
                 "Body": {
-                  "Expression": "<p>The following information was submitted:<p/>\r\n<p>Name: {{ Request.Form.Name }}</p>\r\n<p>Email: {{ Request.Form.Email }}</p>\r\n<p>Message: {{ Request.Form.Message }}</p>"
+                  "Expression": "<p>The following information was submitted:<p/>\r\n<p>Name: {{ Request.Form.FullName }}</p>\r\n<p>Email: {{ Request.Form.Email }}</p>\r\n<p>Message: {{ Request.Form.Message }}</p>"
                 },
                 "IsBodyHtml": true,
                 "ActivityMetadata": {
-                  "Title": "Email to Site Admin"
+                  "Title": "Email Message to Site Admin"
+                },
+                "Author": {
+                  "Expression": null
+                },
+                "ReplyTo": {
+                  "Expression": null
                 }
               }
             },
@@ -2311,7 +2511,7 @@
             {
               "ActivityId": "4kbg33s0s6v491sp4k2dpeymn2",
               "Name": "HttpRedirectTask",
-              "X": 1090,
+              "X": 1430,
               "Y": 470,
               "IsStart": false,
               "Properties": {
@@ -2322,6 +2522,23 @@
                   "Expression": "/thanks"
                 },
                 "Permanent": false
+              }
+            },
+            {
+              "ActivityId": "4tpwv7sfy0qwpy15bbh0kj3en5",
+              "Name": "CreateContentTask",
+              "X": 740,
+              "Y": 470,
+              "IsStart": false,
+              "Properties": {
+                "ContentType": "Message",
+                "Publish": true,
+                "ContentProperties": {
+                  "Expression": "{\r\n  \"TitlePart\": {\r\n     \"Title\": \"{{ Request.Form.fullName }}\"\r\n  },\r\n  \"DisplayText\": \"{{ Request.Form.fullName }}\",\r\n  \"Message\": {\r\n     \"FullName\": {\r\n       \"Text\": \"{{ Request.Form.fullName }}\"\r\n     },\r\n     \"Email\": {\r\n       \"Text\": \"{{ Request.Form.email }}\"\r\n     },\r\n     \"Message\": {\r\n        \"Text\": \"{{ Request.Form.message }}\"\r\n     }\r\n   },\r\n   \"ContainedPart\": {\r\n     \"ListContentItemId\": \"4jj8jr3wyat5h7f8s4dvn052db\"\r\n   }\r\n}"
+                },
+                "ActivityMetadata": {
+                  "Title": "Create Message Content Task"
+                }
               }
             }
           ],
@@ -2340,12 +2557,6 @@
             },
             {
               "Id": 0,
-              "SourceActivityId": "4hr22mvxwk0rex8khhkr9cnncp",
-              "SourceOutcomeName": "Validate Name",
-              "DestinationActivityId": "4655jbn3247ksrt08a2b7r8yw9"
-            },
-            {
-              "Id": 0,
               "SourceActivityId": "4655jbn3247ksrt08a2b7r8yw9",
               "SourceOutcomeName": "Done",
               "DestinationActivityId": "48cgyy0wzhjf50yrkz422rn2n1"
@@ -2355,12 +2566,6 @@
               "SourceActivityId": "48cgyy0wzhjf50yrkz422rn2n1",
               "SourceOutcomeName": "Joined",
               "DestinationActivityId": "4crzwchrbc2fkym4jbg7aed44j"
-            },
-            {
-              "Id": 0,
-              "SourceActivityId": "4crzwchrbc2fkym4jbg7aed44j",
-              "SourceOutcomeName": "Valid",
-              "DestinationActivityId": "47j30tb53gecc2yqewbx3x8pn4"
             },
             {
               "Id": 0,
@@ -2397,6 +2602,30 @@
               "SourceActivityId": "4dpzxry0zjy4t0xhj1xfj5mm4k",
               "SourceOutcomeName": "Done",
               "DestinationActivityId": "48cgyy0wzhjf50yrkz422rn2n1"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4crzwchrbc2fkym4jbg7aed44j",
+              "SourceOutcomeName": "Valid",
+              "DestinationActivityId": "4tpwv7sfy0qwpy15bbh0kj3en5"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4tpwv7sfy0qwpy15bbh0kj3en5",
+              "SourceOutcomeName": "Done",
+              "DestinationActivityId": "47j30tb53gecc2yqewbx3x8pn4"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4tpwv7sfy0qwpy15bbh0kj3en5",
+              "SourceOutcomeName": "Failed",
+              "DestinationActivityId": "4tpwv7sfy0qwpy15bbh0kj3en5"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "47j30tb53gecc2yqewbx3x8pn4",
+              "SourceOutcomeName": "Failed",
+              "DestinationActivityId": "47j30tb53gecc2yqewbx3x8pn4"
             }
           ]
         },
