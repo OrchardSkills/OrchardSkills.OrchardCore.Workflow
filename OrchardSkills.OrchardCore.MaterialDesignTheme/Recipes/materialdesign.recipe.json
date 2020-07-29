@@ -166,6 +166,63 @@
           ]
         },
         {
+          "Name": "AboutPage",
+          "DisplayName": "AboutPage",
+          "Hidden": false,
+          "Settings": {
+            "ContentTypeSettings": {
+              "Creatable": true,
+              "Draftable": true,
+              "Versionable": true,
+              "Listable": true
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "AboutPage",
+              "Name": "AboutPage",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "3"
+                }
+              }
+            },
+            {
+              "PartName": "AutoroutePart",
+              "Name": "AutoroutePart",
+              "Settings": {
+                "AutoroutePartSettings": {
+                  "AllowCustomPath": true,
+                  "Pattern": "{{ Model.ContentItem | display_text | slugify }}",
+                  "ShowHomepageOption": true
+                },
+                "ContentTypePartSettings": {
+                  "Position": "1"
+                }
+              }
+            },
+            {
+              "PartName": "HtmlBodyPart",
+              "Name": "HtmlBodyPart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Editor": "Wysiwyg",
+                  "Position": "2"
+                }
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            }
+          ]
+        },
+        {
           "Name": "LiquidPage",
           "DisplayName": "Liquid Page",
           "Hidden": false,
@@ -1009,6 +1066,35 @@
           ]
         },
         {
+          "Name": "AboutPage",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "TextField",
+              "Name": "Subtitle",
+              "Settings": {
+                "ContentPartFieldSettings": {
+                  "DisplayName": "Subtitle",
+                  "Position": "0"
+                }
+              }
+            },
+            {
+              "FieldName": "MediaField",
+              "Name": "Image",
+              "Settings": {
+                "ContentPartFieldSettings": {
+                  "DisplayName": "Banner Image",
+                  "Position": "0"
+                },
+                "MediaFieldSettings": {
+                  "Multiple": false
+                }
+              }
+            }
+          ]
+        },
+        {
           "Name": "Blockquote",
           "Settings": {},
           "ContentPartFieldDefinitionRecords": [
@@ -1360,6 +1446,32 @@
           }
         },
         {
+          "ContentType": "Subscription",
+          "ContentItemId": "[js: variables('subscriptionContentItemId')]",
+          "DisplayText": "Subscription",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": {
+            "Title": "Subscription"
+          },
+          "HtmlBodyPart": {
+            "Html": "List of Subscribers"
+          },
+          "AutoroutePart": {
+            "Path": "subscription"
+          },
+          "ListPart": {},
+          "Subscription": {
+            "Image": {
+              "Paths": [
+                "home-bg.jpg"
+              ]
+            }
+          }
+        },
+        {
           "ContentType": "Blog",
           "ContentItemId": "[js: variables('blogContentItemId')]",
           "DisplayText": "Blog",
@@ -1491,7 +1603,7 @@
         },
         {
           "ContentItemId": "[js: uuid()]",
-          "ContentType": "Article",
+          "ContentType": "AboutPage",
           "DisplayText": "About",
           "Latest": true,
           "Published": true,
@@ -1502,14 +1614,14 @@
             "SetHomepage": false
           },
           "HtmlBodyPart": {
-            "Html": "<h1>About Us</h1><p>Tell your story</p><h1>Know Your Audience</h1><p>Who are you writing for? Decide on who you want to write to. Decide what you want to write about.</p><h1>What Value Are You Bringing to Your Readers?</h1><p>Why should they care? People want value, and they want it now – give it to them already! If you waffle around here, you will lose readers. You need to tell them exactly what they are going to get from your site and how it will help them.</p><h1>Build Your Credibility</h1><p>Why should they listen to you? After all, you’re just another voice on the interwebs and the interwebs are full of shady characters trying to make moves on your wallet. You need to tell your readers about your expertise. Make them trust you, help them out, and then they will love you.</p><p>Consider adding:</p><ul><li>A snippet about your site’s history<br></li><li>If you’ve been featured on any authority sites as a guest blogger<br></li></ul><h1>Your Biography</h1><p>Now you get to talk about you. You get to tell your story. But only the hyper-relevant and interesting parts.  Write about yourself like the superhero you secretly are or want to be.  But don’t overshare on the details, make sure you leave a little mystique.</p><p>Think about your story:<br></p><ul><li>What made you decide to start a blog or business?<br></li><li>What’s your big why?<br></li><li>What keeps you going?</li></ul><h1>Call to Action</h1><p>You should have at least one list opt-in form on your About page. Why? Your About page is one of the most frequently visited pages on your site. If you get it right, you’re going to connect with your readers.</p>"
+            "Html": "<p></p>"
           },
           "TitlePart": {
             "Title": "About"
           },
-          "Article": {
+          "AboutPage": {
             "Subtitle": {
-              "Text": "Reasons for reading our blog"
+              "Text": "About Us"
             }
           }
         },
