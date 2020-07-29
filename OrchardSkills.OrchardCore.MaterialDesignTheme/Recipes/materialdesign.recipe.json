@@ -1212,15 +1212,6 @@
                 "ContentType": "LinkMenuItem",
                 "ContentItemId": "[js: uuid()]",
                 "LinkMenuItemPart": {
-                  "Name": "Subscription",
-                  "Url": "~/subscription"
-                }
-              },
-
-              {
-                "ContentType": "LinkMenuItem",
-                "ContentItemId": "[js: uuid()]",
-                "LinkMenuItemPart": {
                   "Name": "Contact",
                   "Url": "~/contact"
                 }
@@ -1366,32 +1357,6 @@
           "AutoroutePart": {
             "Path": "categories",
             "RouteContainedItems": true
-          }
-        },
-        {
-          "ContentType": "Subscription",
-          "ContentItemId": "[js: variables('subscriptionContentItemId')]",
-          "DisplayText": "Subscription",
-          "Latest": true,
-          "Published": true,
-          "Owner": "[js: parameters('AdminUsername')]",
-          "Author": "[js: parameters('AdminUsername')]",
-          "TitlePart": {
-            "Title": "Subscription"
-          },
-          "HtmlBodyPart": {
-            "Html": "List of Subscribers"
-          },
-          "AutoroutePart": {
-            "Path": "subscription"
-          },
-          "ListPart": {},
-          "Subscription": {
-            "Image": {
-              "Paths": [
-                "home-bg.jpg"
-              ]
-            }
           }
         },
         {
