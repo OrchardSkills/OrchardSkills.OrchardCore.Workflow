@@ -2370,404 +2370,407 @@
       "name": "WorkflowType",
       "data": [
         {
-          "WorkflowTypeId": "4jj8jr3wyat5h7f8s4dvn052db",
-          "Name": "Contact",
-          "IsEnabled": true,
-          "IsSingleton": false,
-          "DeleteFinishedWorkflows": false,
-          "Activities": [
+          "name": "WorkflowType",
+          "data": [
             {
-              "ActivityId": "490rajejvg37c4wd8m50q06mxv",
-              "Name": "HttpRequestEvent",
-              "X": 0,
-              "Y": 0,
-              "IsStart": true,
-              "Properties": {
-                "ActivityMetadata": {
-                  "Title": "Contact Form Submitted"
+              "WorkflowTypeId": "4tkxphgfwx3dh1bgbnbqv26fd6",
+              "Name": "Subscribe",
+              "IsEnabled": true,
+              "IsSingleton": false,
+              "DeleteFinishedWorkflows": false,
+              "Activities": [
+                {
+                  "ActivityId": "4pt6qkjr50th52ss34h8sq4dm6",
+                  "Name": "HttpRequestEvent",
+                  "X": 60,
+                  "Y": 10,
+                  "IsStart": true,
+                  "Properties": {
+                    "ActivityMetadata": {
+                      "Title": "Subscribe Request Event"
+                    },
+                    "HttpMethod": "POST",
+                    "Url": "/workflows/Invoke?token=CfDJ8Mi9GjUGmXFKmr5mf2TKf7vWIHwA8rEg1DPWfZW3EK927z0mEC__nyDKbKIMvP3fAUAwoucwlZoH7R3QgXYq8iYi3YR-2kAzqz-aUrZQXZ3A3a-wJEtQLm_Pyxi1ChOpEmP4q2IrAucsfkzoG6sPdD-KHrPMEykXdoaFsDgEWeuA3gWIzOUjbcfux8HbI6uXvLiQXdvrMvbP-7kWistHlwGI0FHdEi0H_seUM3CFEp1y",
+                    "ValidateAntiforgeryToken": true,
+                    "TokenLifeSpan": 0
+                  }
                 },
-                "HttpMethod": "POST",
-                "Url": "/workflows/Invoke?token=CfDJ8LNsm1L3BhpCvl1kHZG8BbD7lKzRL4aioHjYFUD-RSYTqQ-fNq1eigkX-b7fKYzHZ0y31U8oAo9pUI7xg0qz_L2ewWrx_hHn9F2jeJ-CYgdcsl0R2k7EzFmZ9VleR0SxC83VUWMoHIPE4aVH79bvuY0tIWWkkTJUE0sEHpg4LeMR_c2rdd2026JyRBxGrRwPfpUCHU2TlmQEvkxSqBUrw-yXabqBgQjpfMX1GKHrhVGe",
-                "ValidateAntiforgeryToken": true,
-                "TokenLifeSpan": 0
-              }
-            },
-            {
-              "ActivityId": "4jjt2hqjp6xk9164hkp0cxv3w7",
-              "Name": "BindModelStateTask",
-              "X": 0,
-              "Y": 190,
-              "IsStart": false,
-              "Properties": {
-                "ActivityMetadata": {
-                  "Title": null
+                {
+                  "ActivityId": "4e1ap5cd1abqz1429c56fc3sd2",
+                  "Name": "CreateContentTask",
+                  "X": 390,
+                  "Y": 10,
+                  "IsStart": false,
+                  "Properties": {
+                    "ContentType": "Subscriber",
+                    "Publish": true,
+                    "ContentProperties": {
+                      "Expression": "{\r\n  \"TitlePart\": {\r\n     \"Title\": \"{{ Request.Form.firstName }} {{ Request.Form.lastName }}\"\r\n  },\r\n  \"DisplayText\": \"{{ Request.Form.firstName }} {{ Request.Form.lastName }}\",\r\n  \"Subscriber\": {\r\n     \"FirstName\": {\r\n       \"Text\": \"{{ Request.Form.firstName }}\"\r\n     },\r\n     \"LastName\": {\r\n        \"Text\": \"{{ Request.Form.lastName }}\"\r\n     },\r\n     \"Email\": {\r\n       \"Text\": \"{{ Request.Form.email }}\"\r\n     }\r\n   },\r\n   \"ContainedPart\": {\r\n     \"ListContentItemId\": \"462m1ps5kkzkp2k5da5pfhh2ww\"\r\n   }\r\n}"
+                    },
+                    "ActivityMetadata": {
+                      "Title": "Create Content Task"
+                    }
+                  }
+                },
+                {
+                  "ActivityId": "4p4yv9hyrmfvg4mbnyaz05whcx",
+                  "Name": "HttpRedirectTask",
+                  "X": 730,
+                  "Y": 10,
+                  "IsStart": false,
+                  "Properties": {
+                    "ActivityMetadata": {
+                      "Title": "Subscribed"
+                    },
+                    "Location": {
+                      "Expression": "/subscribed"
+                    },
+                    "Permanent": false
+                  }
+                },
+                {
+                  "ActivityId": "4ebab4y9jva4r1gecc32q0tvwd",
+                  "Name": "HttpRedirectTask",
+                  "X": 400,
+                  "Y": 200,
+                  "IsStart": false,
+                  "Properties": {
+                    "ActivityMetadata": {
+                      "Title": "Workflow Issue Redirect Task"
+                    },
+                    "Location": {
+                      "Expression": "/workflow-issue"
+                    },
+                    "Permanent": false
+                  }
                 }
-              }
-            },
-            {
-              "ActivityId": "4hr22mvxwk0rex8khhkr9cnncp",
-              "Name": "ForkTask",
-              "X": 340,
-              "Y": 20,
-              "IsStart": false,
-              "Properties": {
-                "ActivityMetadata": {
-                  "Title": "Validate Form Fields"
+              ],
+              "Transitions": [
+                {
+                  "Id": 0,
+                  "SourceActivityId": "4pt6qkjr50th52ss34h8sq4dm6",
+                  "SourceOutcomeName": "Done",
+                  "DestinationActivityId": "4e1ap5cd1abqz1429c56fc3sd2"
                 },
-                "Forks": [
-                  "Validate FullName",
-                  "Validate Email",
-                  "Validate Message"
-                ]
-              }
-            },
-            {
-              "ActivityId": "4655jbn3247ksrt08a2b7r8yw9",
-              "Name": "ValidateFormFieldTask",
-              "X": 320,
-              "Y": 190,
-              "IsStart": false,
-              "Properties": {
-                "FieldName": "Name",
-                "ErrorMessage": "No Name entered",
-                "ActivityMetadata": {
-                  "Title": "Validate Name"
+                {
+                  "Id": 0,
+                  "SourceActivityId": "4e1ap5cd1abqz1429c56fc3sd2",
+                  "SourceOutcomeName": "Done",
+                  "DestinationActivityId": "4p4yv9hyrmfvg4mbnyaz05whcx"
+                },
+                {
+                  "Id": 0,
+                  "SourceActivityId": "4e1ap5cd1abqz1429c56fc3sd2",
+                  "SourceOutcomeName": "Failed",
+                  "DestinationActivityId": "4ebab4y9jva4r1gecc32q0tvwd"
                 }
-              }
+              ]
             },
             {
-              "ActivityId": "4xp021fs701ay5gmram0nyjcdh",
-              "Name": "ValidateFormFieldTask",
-              "X": 760,
-              "Y": 170,
-              "IsStart": false,
-              "Properties": {
-                "FieldName": "Email",
-                "ErrorMessage": "Email not valid",
-                "ActivityMetadata": {
-                  "Title": "Validate Email"
+              "WorkflowTypeId": "4jj8jr3wyat5h7f8s4dvn052db",
+              "Name": "Contact",
+              "IsEnabled": true,
+              "IsSingleton": false,
+              "DeleteFinishedWorkflows": false,
+              "Activities": [
+                {
+                  "ActivityId": "490rajejvg37c4wd8m50q06mxv",
+                  "Name": "HttpRequestEvent",
+                  "X": 0,
+                  "Y": 0,
+                  "IsStart": true,
+                  "Properties": {
+                    "ActivityMetadata": {
+                      "Title": "Contact Form Submitted"
+                    },
+                    "HttpMethod": "POST",
+                    "Url": "/workflows/Invoke?token=CfDJ8Mi9GjUGmXFKmr5mf2TKf7uvgTnDUILhTje_wJTzpIrEIi9MdVMOZWTXwRg8XWhtXx1hTMypc0QPC-QXL2A82hXfMQ5VvDHiwnAMsiaZsvQNqzQSOa5W9UhphLbP-IGPSR2jysU_aW_cWVpGZn5E1rHxRtjXxKSqIw-6oU81oqWcXurwrAGPv_pKhXX215EaISzf8oStNdpn7qR9Ma-0sdTy01lVvFoQV4Ph2vn2VpOs",
+                    "ValidateAntiforgeryToken": true,
+                    "TokenLifeSpan": 0
+                  }
+                },
+                {
+                  "ActivityId": "4jjt2hqjp6xk9164hkp0cxv3w7",
+                  "Name": "BindModelStateTask",
+                  "X": 0,
+                  "Y": 190,
+                  "IsStart": false,
+                  "Properties": {
+                    "ActivityMetadata": {
+                      "Title": null
+                    }
+                  }
+                },
+                {
+                  "ActivityId": "4hr22mvxwk0rex8khhkr9cnncp",
+                  "Name": "ForkTask",
+                  "X": 340,
+                  "Y": 20,
+                  "IsStart": false,
+                  "Properties": {
+                    "ActivityMetadata": {
+                      "Title": "Validate Form Fields"
+                    },
+                    "Forks": [
+                      "Validate FullName",
+                      "Validate Email",
+                      "Validate Message"
+                    ]
+                  }
+                },
+                {
+                  "ActivityId": "4655jbn3247ksrt08a2b7r8yw9",
+                  "Name": "ValidateFormFieldTask",
+                  "X": 320,
+                  "Y": 190,
+                  "IsStart": false,
+                  "Properties": {
+                    "FieldName": "Name",
+                    "ErrorMessage": "No Name entered",
+                    "ActivityMetadata": {
+                      "Title": "Validate Name"
+                    }
+                  }
+                },
+                {
+                  "ActivityId": "4xp021fs701ay5gmram0nyjcdh",
+                  "Name": "ValidateFormFieldTask",
+                  "X": 760,
+                  "Y": 170,
+                  "IsStart": false,
+                  "Properties": {
+                    "FieldName": "Email",
+                    "ErrorMessage": "Email not valid",
+                    "ActivityMetadata": {
+                      "Title": "Validate Email"
+                    }
+                  }
+                },
+                {
+                  "ActivityId": "4dpzxry0zjy4t0xhj1xfj5mm4k",
+                  "Name": "ValidateFormFieldTask",
+                  "X": 1150,
+                  "Y": 200,
+                  "IsStart": false,
+                  "Properties": {
+                    "FieldName": "Message",
+                    "ErrorMessage": "No Message entered",
+                    "ActivityMetadata": {
+                      "Title": "Validate Message"
+                    }
+                  }
+                },
+                {
+                  "ActivityId": "48cgyy0wzhjf50yrkz422rn2n1",
+                  "Name": "JoinTask",
+                  "X": 440,
+                  "Y": 300,
+                  "IsStart": false,
+                  "Properties": {
+                    "ActivityMetadata": {
+                      "Title": null
+                    },
+                    "Mode": 0
+                  }
+                },
+                {
+                  "ActivityId": "4crzwchrbc2fkym4jbg7aed44j",
+                  "Name": "ValidateFormTask",
+                  "X": 500,
+                  "Y": 470,
+                  "IsStart": false,
+                  "Properties": {
+                    "ActivityMetadata": {
+                      "Title": null
+                    }
+                  }
+                },
+                {
+                  "ActivityId": "47j30tb53gecc2yqewbx3x8pn4",
+                  "Name": "EmailTask",
+                  "X": 950,
+                  "Y": 680,
+                  "IsStart": false,
+                  "Properties": {
+                    "Sender": {
+                      "Expression": "sales@orchardskills.com"
+                    },
+                    "Recipients": {
+                      "Expression": "sales@orchardskills.com"
+                    },
+                    "Subject": {
+                      "Expression": "New Message"
+                    },
+                    "Body": {
+                      "Expression": "<p>The following information was submitted:<p/>\r\n<p>Name: {{ Request.Form.FullName }}</p>\r\n<p>Email: {{ Request.Form.Email }}</p>\r\n<p>Message: {{ Request.Form.Message }}</p>"
+                    },
+                    "IsBodyHtml": true,
+                    "ActivityMetadata": {
+                      "Title": "Email Message to Site Admin"
+                    },
+                    "Author": {
+                      "Expression": null
+                    },
+                    "ReplyTo": {
+                      "Expression": null
+                    }
+                  }
+                },
+                {
+                  "ActivityId": "4kyt6yjc0nhp7zn89gmbhrbsdv",
+                  "Name": "HttpRedirectTask",
+                  "X": 190,
+                  "Y": 470,
+                  "IsStart": false,
+                  "Properties": {
+                    "ActivityMetadata": {
+                      "Title": "Display Form Errors"
+                    },
+                    "Location": {
+                      "Expression": "/contact"
+                    },
+                    "Permanent": false
+                  }
+                },
+                {
+                  "ActivityId": "4kbg33s0s6v491sp4k2dpeymn2",
+                  "Name": "HttpRedirectTask",
+                  "X": 1310,
+                  "Y": 680,
+                  "IsStart": false,
+                  "Properties": {
+                    "ActivityMetadata": {
+                      "Title": "Display Thank You Page"
+                    },
+                    "Location": {
+                      "Expression": "/thanks"
+                    },
+                    "Permanent": false
+                  }
+                },
+                {
+                  "ActivityId": "4tpwv7sfy0qwpy15bbh0kj3en5",
+                  "Name": "CreateContentTask",
+                  "X": 740,
+                  "Y": 470,
+                  "IsStart": false,
+                  "Properties": {
+                    "ContentType": "Message",
+                    "Publish": true,
+                    "ContentProperties": {
+                      "Expression": "{\r\n  \"TitlePart\": {\r\n     \"Title\": \"{{ Request.Form.fullName }}\"\r\n  },\r\n  \"DisplayText\": \"{{ Request.Form.fullName }}\",\r\n  \"Message\": {\r\n     \"FullName\": {\r\n       \"Text\": \"{{ Request.Form.fullName }}\"\r\n     },\r\n     \"Email\": {\r\n       \"Text\": \"{{ Request.Form.email }}\"\r\n     },\r\n     \"Message\": {\r\n        \"Text\": \"{{ Request.Form.message }}\"\r\n     }\r\n   },\r\n   \"ContainedPart\": {\r\n     \"ListContentItemId\": \"4jj8jr3wyat5h7f8s4dvn052db\"\r\n   }\r\n}"
+                    },
+                    "ActivityMetadata": {
+                      "Title": "Create Message Content Task"
+                    }
+                  }
+                },
+                {
+                  "ActivityId": "4tq0488kq7z7qwbdzj4s04vkwx",
+                  "Name": "HttpRedirectTask",
+                  "X": 1100,
+                  "Y": 340,
+                  "IsStart": false,
+                  "Properties": {
+                    "ActivityMetadata": {
+                      "Title": "Workflow Issue Redirect Task"
+                    },
+                    "Location": {
+                      "Expression": "/workflow-issue"
+                    },
+                    "Permanent": false
+                  }
                 }
-              }
-            },
-            {
-              "ActivityId": "4dpzxry0zjy4t0xhj1xfj5mm4k",
-              "Name": "ValidateFormFieldTask",
-              "X": 1150,
-              "Y": 200,
-              "IsStart": false,
-              "Properties": {
-                "FieldName": "Message",
-                "ErrorMessage": "No Message entered",
-                "ActivityMetadata": {
-                  "Title": "Validate Message"
+              ],
+              "Transitions": [
+                {
+                  "Id": 0,
+                  "SourceActivityId": "490rajejvg37c4wd8m50q06mxv",
+                  "SourceOutcomeName": "Done",
+                  "DestinationActivityId": "4jjt2hqjp6xk9164hkp0cxv3w7"
+                },
+                {
+                  "Id": 0,
+                  "SourceActivityId": "4jjt2hqjp6xk9164hkp0cxv3w7",
+                  "SourceOutcomeName": "Done",
+                  "DestinationActivityId": "4hr22mvxwk0rex8khhkr9cnncp"
+                },
+                {
+                  "Id": 0,
+                  "SourceActivityId": "4655jbn3247ksrt08a2b7r8yw9",
+                  "SourceOutcomeName": "Done",
+                  "DestinationActivityId": "48cgyy0wzhjf50yrkz422rn2n1"
+                },
+                {
+                  "Id": 0,
+                  "SourceActivityId": "48cgyy0wzhjf50yrkz422rn2n1",
+                  "SourceOutcomeName": "Joined",
+                  "DestinationActivityId": "4crzwchrbc2fkym4jbg7aed44j"
+                },
+                {
+                  "Id": 0,
+                  "SourceActivityId": "4crzwchrbc2fkym4jbg7aed44j",
+                  "SourceOutcomeName": "Invalid",
+                  "DestinationActivityId": "4kyt6yjc0nhp7zn89gmbhrbsdv"
+                },
+                {
+                  "Id": 0,
+                  "SourceActivityId": "47j30tb53gecc2yqewbx3x8pn4",
+                  "SourceOutcomeName": "Done",
+                  "DestinationActivityId": "4kbg33s0s6v491sp4k2dpeymn2"
+                },
+                {
+                  "Id": 0,
+                  "SourceActivityId": "4hr22mvxwk0rex8khhkr9cnncp",
+                  "SourceOutcomeName": "Validate Email",
+                  "DestinationActivityId": "4xp021fs701ay5gmram0nyjcdh"
+                },
+                {
+                  "Id": 0,
+                  "SourceActivityId": "4hr22mvxwk0rex8khhkr9cnncp",
+                  "SourceOutcomeName": "Validate Message",
+                  "DestinationActivityId": "4dpzxry0zjy4t0xhj1xfj5mm4k"
+                },
+                {
+                  "Id": 0,
+                  "SourceActivityId": "4xp021fs701ay5gmram0nyjcdh",
+                  "SourceOutcomeName": "Done",
+                  "DestinationActivityId": "48cgyy0wzhjf50yrkz422rn2n1"
+                },
+                {
+                  "Id": 0,
+                  "SourceActivityId": "4dpzxry0zjy4t0xhj1xfj5mm4k",
+                  "SourceOutcomeName": "Done",
+                  "DestinationActivityId": "48cgyy0wzhjf50yrkz422rn2n1"
+                },
+                {
+                  "Id": 0,
+                  "SourceActivityId": "4crzwchrbc2fkym4jbg7aed44j",
+                  "SourceOutcomeName": "Valid",
+                  "DestinationActivityId": "4tpwv7sfy0qwpy15bbh0kj3en5"
+                },
+                {
+                  "Id": 0,
+                  "SourceActivityId": "4tpwv7sfy0qwpy15bbh0kj3en5",
+                  "SourceOutcomeName": "Done",
+                  "DestinationActivityId": "47j30tb53gecc2yqewbx3x8pn4"
+                },
+                {
+                  "Id": 0,
+                  "SourceActivityId": "47j30tb53gecc2yqewbx3x8pn4",
+                  "SourceOutcomeName": "Failed",
+                  "DestinationActivityId": "4tq0488kq7z7qwbdzj4s04vkwx"
+                },
+                {
+                  "Id": 0,
+                  "SourceActivityId": "4tpwv7sfy0qwpy15bbh0kj3en5",
+                  "SourceOutcomeName": "Failed",
+                  "DestinationActivityId": "4tq0488kq7z7qwbdzj4s04vkwx"
                 }
-              }
-            },
-            {
-              "ActivityId": "48cgyy0wzhjf50yrkz422rn2n1",
-              "Name": "JoinTask",
-              "X": 440,
-              "Y": 300,
-              "IsStart": false,
-              "Properties": {
-                "ActivityMetadata": {
-                  "Title": null
-                },
-                "Mode": 0
-              }
-            },
-            {
-              "ActivityId": "4crzwchrbc2fkym4jbg7aed44j",
-              "Name": "ValidateFormTask",
-              "X": 500,
-              "Y": 470,
-              "IsStart": false,
-              "Properties": {
-                "ActivityMetadata": {
-                  "Title": null
-                }
-              }
-            },
-            {
-              "ActivityId": "47j30tb53gecc2yqewbx3x8pn4",
-              "Name": "EmailTask",
-              "X": 1070,
-              "Y": 470,
-              "IsStart": false,
-              "Properties": {
-                "Sender": {
-                  "Expression": "sales@orchardskills.com"
-                },
-                "Recipients": {
-                  "Expression": "sales@orchardskills.com"
-                },
-                "Subject": {
-                  "Expression": "New Message"
-                },
-                "Body": {
-                  "Expression": "<p>The following information was submitted:<p/>\r\n<p>Name: {{ Request.Form.FullName }}</p>\r\n<p>Email: {{ Request.Form.Email }}</p>\r\n<p>Message: {{ Request.Form.Message }}</p>"
-                },
-                "IsBodyHtml": true,
-                "ActivityMetadata": {
-                  "Title": "Email Message to Site Admin"
-                },
-                "Author": {
-                  "Expression": null
-                },
-                "ReplyTo": {
-                  "Expression": null
-                }
-              }
-            },
-            {
-              "ActivityId": "4kyt6yjc0nhp7zn89gmbhrbsdv",
-              "Name": "HttpRedirectTask",
-              "X": 190,
-              "Y": 470,
-              "IsStart": false,
-              "Properties": {
-                "ActivityMetadata": {
-                  "Title": "Display Form Errors"
-                },
-                "Location": {
-                  "Expression": "/contact"
-                },
-                "Permanent": false
-              }
-            },
-            {
-              "ActivityId": "4kbg33s0s6v491sp4k2dpeymn2",
-              "Name": "HttpRedirectTask",
-              "X": 1430,
-              "Y": 470,
-              "IsStart": false,
-              "Properties": {
-                "ActivityMetadata": {
-                  "Title": "Display Thank You Page"
-                },
-                "Location": {
-                  "Expression": "/thanks"
-                },
-                "Permanent": false
-              }
-            },
-            {
-              "ActivityId": "4tpwv7sfy0qwpy15bbh0kj3en5",
-              "Name": "CreateContentTask",
-              "X": 740,
-              "Y": 470,
-              "IsStart": false,
-              "Properties": {
-                "ContentType": "Message",
-                "Publish": true,
-                "ContentProperties": {
-                  "Expression": "{\r\n  \"TitlePart\": {\r\n     \"Title\": \"{{ Request.Form.fullName }}\"\r\n  },\r\n  \"DisplayText\": \"{{ Request.Form.fullName }}\",\r\n  \"Message\": {\r\n     \"FullName\": {\r\n       \"Text\": \"{{ Request.Form.fullName }}\"\r\n     },\r\n     \"Email\": {\r\n       \"Text\": \"{{ Request.Form.email }}\"\r\n     },\r\n     \"Message\": {\r\n        \"Text\": \"{{ Request.Form.message }}\"\r\n     }\r\n   },\r\n   \"ContainedPart\": {\r\n     \"ListContentItemId\": \"4jj8jr3wyat5h7f8s4dvn052db\"\r\n   }\r\n}"
-                },
-                "ActivityMetadata": {
-                  "Title": "Create Message Content Task"
-                }
-              }
-            },
-            {
-              "ActivityId": "4tq0488kq7z7qwbdzj4s04vkwx",
-              "Name": "HttpRedirectTask",
-              "X": 1300,
-              "Y": 300,
-              "IsStart": false,
-              "Properties": {
-                "ActivityMetadata": {
-                  "Title": "Workflow Issue Redirect Task"
-                },
-                "Location": {
-                  "Expression": "/workflow-issue"
-                },
-                "Permanent": false
-              }
-            }
-          ],
-          "Transitions": [
-            {
-              "Id": 0,
-              "SourceActivityId": "490rajejvg37c4wd8m50q06mxv",
-              "SourceOutcomeName": "Done",
-              "DestinationActivityId": "4jjt2hqjp6xk9164hkp0cxv3w7"
-            },
-            {
-              "Id": 0,
-              "SourceActivityId": "4jjt2hqjp6xk9164hkp0cxv3w7",
-              "SourceOutcomeName": "Done",
-              "DestinationActivityId": "4hr22mvxwk0rex8khhkr9cnncp"
-            },
-            {
-              "Id": 0,
-              "SourceActivityId": "4655jbn3247ksrt08a2b7r8yw9",
-              "SourceOutcomeName": "Done",
-              "DestinationActivityId": "48cgyy0wzhjf50yrkz422rn2n1"
-            },
-            {
-              "Id": 0,
-              "SourceActivityId": "48cgyy0wzhjf50yrkz422rn2n1",
-              "SourceOutcomeName": "Joined",
-              "DestinationActivityId": "4crzwchrbc2fkym4jbg7aed44j"
-            },
-            {
-              "Id": 0,
-              "SourceActivityId": "4crzwchrbc2fkym4jbg7aed44j",
-              "SourceOutcomeName": "Invalid",
-              "DestinationActivityId": "4kyt6yjc0nhp7zn89gmbhrbsdv"
-            },
-            {
-              "Id": 0,
-              "SourceActivityId": "47j30tb53gecc2yqewbx3x8pn4",
-              "SourceOutcomeName": "Done",
-              "DestinationActivityId": "4kbg33s0s6v491sp4k2dpeymn2"
-            },
-            {
-              "Id": 0,
-              "SourceActivityId": "4hr22mvxwk0rex8khhkr9cnncp",
-              "SourceOutcomeName": "Validate Email",
-              "DestinationActivityId": "4xp021fs701ay5gmram0nyjcdh"
-            },
-            {
-              "Id": 0,
-              "SourceActivityId": "4hr22mvxwk0rex8khhkr9cnncp",
-              "SourceOutcomeName": "Validate Message",
-              "DestinationActivityId": "4dpzxry0zjy4t0xhj1xfj5mm4k"
-            },
-            {
-              "Id": 0,
-              "SourceActivityId": "4xp021fs701ay5gmram0nyjcdh",
-              "SourceOutcomeName": "Done",
-              "DestinationActivityId": "48cgyy0wzhjf50yrkz422rn2n1"
-            },
-            {
-              "Id": 0,
-              "SourceActivityId": "4dpzxry0zjy4t0xhj1xfj5mm4k",
-              "SourceOutcomeName": "Done",
-              "DestinationActivityId": "48cgyy0wzhjf50yrkz422rn2n1"
-            },
-            {
-              "Id": 0,
-              "SourceActivityId": "4crzwchrbc2fkym4jbg7aed44j",
-              "SourceOutcomeName": "Valid",
-              "DestinationActivityId": "4tpwv7sfy0qwpy15bbh0kj3en5"
-            },
-            {
-              "Id": 0,
-              "SourceActivityId": "4tpwv7sfy0qwpy15bbh0kj3en5",
-              "SourceOutcomeName": "Done",
-              "DestinationActivityId": "47j30tb53gecc2yqewbx3x8pn4"
-            },
-            {
-              "Id": 0,
-              "SourceActivityId": "4tpwv7sfy0qwpy15bbh0kj3en5",
-              "SourceOutcomeName": "Failed",
-              "DestinationActivityId": "4tpwv7sfy0qwpy15bbh0kj3en5"
-            },
-            {
-              "Id": 0,
-              "SourceActivityId": "47j30tb53gecc2yqewbx3x8pn4",
-              "SourceOutcomeName": "Failed",
-              "DestinationActivityId": "4tq0488kq7z7qwbdzj4s04vkwx"
+              ]
             }
           ]
         },
-        {
-          "WorkflowTypeId": "4tkxphgfwx3dh1bgbnbqv26fd6",
-          "Name": "Subscribe",
-          "IsEnabled": true,
-          "IsSingleton": false,
-          "DeleteFinishedWorkflows": false,
-          "Activities": [
-            {
-              "ActivityId": "4pt6qkjr50th52ss34h8sq4dm6",
-              "Name": "HttpRequestEvent",
-              "X": 60,
-              "Y": 10,
-              "IsStart": true,
-              "Properties": {
-                "ActivityMetadata": {
-                  "Title": "Subscribe Request Event"
-                },
-                "HttpMethod": "POST",
-                "Url": "/workflows/Invoke?token=CfDJ8JmvH6APCDFHsp7rD4dJLgIoRLJ82sOfNdxcR1cNrGdIekgAB2r0Np3_jbCpIZULYfCMgMRwLqppisDKb0RUKJuZEQeNvU-NBuu7Lw-rh0fhYBnEI3dy74RxdSfOcnjvVf4ndrP8DKf_84DNopklIncf0f7qltQE4p0cGQfCfXDk6xTjBjJQaCUpij--fdcw8RCXh3hJqL6A8-lvYryP-MAHmChanFNKY8hRWY7LgEpT",
-                "ValidateAntiforgeryToken": true,
-                "TokenLifeSpan": 0
-              }
-            },
-            {
-              "ActivityId": "4e1ap5cd1abqz1429c56fc3sd2",
-              "Name": "CreateContentTask",
-              "X": 390,
-              "Y": 10,
-              "IsStart": false,
-              "Properties": {
-                "ContentType": "Subscriber",
-                "Publish": true,
-                "ContentProperties": {
-                  "Expression": "{\r\n  \"TitlePart\": {\r\n     \"Title\": \"{{ Request.Form.firstName }} {{ Request.Form.lastName }}\"\r\n  },\r\n  \"DisplayText\": \"{{ Request.Form.firstName }} {{ Request.Form.lastName }}\",\r\n  \"Subscriber\": {\r\n     \"FirstName\": {\r\n       \"Text\": \"{{ Request.Form.firstName }}\"\r\n     },\r\n     \"LastName\": {\r\n        \"Text\": \"{{ Request.Form.lastName }}\"\r\n     },\r\n     \"Email\": {\r\n       \"Text\": \"{{ Request.Form.email }}\"\r\n     }\r\n   },\r\n   \"ContainedPart\": {\r\n     \"ListContentItemId\": \"462m1ps5kkzkp2k5da5pfhh2ww\"\r\n   }\r\n}"
-                },
-                "ActivityMetadata": {
-                  "Title": "Create Content Task"
-                }
-              }
-            },
-            {
-              "ActivityId": "4p4yv9hyrmfvg4mbnyaz05whcx",
-              "Name": "HttpRedirectTask",
-              "X": 730,
-              "Y": 10,
-              "IsStart": false,
-              "Properties": {
-                "ActivityMetadata": {
-                  "Title": "Subscribed"
-                },
-                "Location": {
-                  "Expression": "/subscribed"
-                },
-                "Permanent": false
-              }
-            },
-            {
-              "ActivityId": "4ebab4y9jva4r1gecc32q0tvwd",
-              "Name": "HttpRedirectTask",
-              "X": 400,
-              "Y": 200,
-              "IsStart": false,
-              "Properties": {
-                "ActivityMetadata": {
-                  "Title": "Workflow Issue Redirect Task"
-                },
-                "Location": {
-                  "Expression": "/workflow-issue"
-                },
-                "Permanent": false
-              }
-            }
-          ],
-          "Transitions": [
-            {
-              "Id": 0,
-              "SourceActivityId": "4pt6qkjr50th52ss34h8sq4dm6",
-              "SourceOutcomeName": "Done",
-              "DestinationActivityId": "4e1ap5cd1abqz1429c56fc3sd2"
-            },
-            {
-              "Id": 0,
-              "SourceActivityId": "4e1ap5cd1abqz1429c56fc3sd2",
-              "SourceOutcomeName": "Done",
-              "DestinationActivityId": "4p4yv9hyrmfvg4mbnyaz05whcx"
-            },
-            {
-              "Id": 0,
-              "SourceActivityId": "4e1ap5cd1abqz1429c56fc3sd2",
-              "SourceOutcomeName": "Failed",
-              "DestinationActivityId": "4ebab4y9jva4r1gecc32q0tvwd"
-            }
-          ]
-        }
-      ]
-    },
     {
       "name": "Settings",
       "LoginSettings": {
