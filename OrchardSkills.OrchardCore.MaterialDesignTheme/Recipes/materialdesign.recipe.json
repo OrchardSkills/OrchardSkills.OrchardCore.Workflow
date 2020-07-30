@@ -1811,7 +1811,7 @@
             "SetHomepage": false
           },
           "HtmlBodyPart": {
-            "Html": "<p>Thank you for your message. Someone will get back with you as soon as possible.</p>"
+            "Html": "<p class=\"text-center\">Thank you for your message. Someone will get back with you as soon as possible.</p>"
           },
           "TitlePart": {
             "Title": "Thanks"
@@ -1835,7 +1835,7 @@
             "SetHomepage": false
           },
           "HtmlBodyPart": {
-            "Html": "<p>Thank you for subscribing. You will now be receiving our weekly newsletter.</p>"
+            "Html": "<p class=\"text-center\">Thank you for subscribing. You will now be receiving our weekly newsletter.</p>"
           },
           "TitlePart": {
             "Title": "Subscribed"
@@ -1867,10 +1867,37 @@
             "Absolute": false
           },
           "HtmlBodyPart": {
-            "Html": "<p>We apologize for your inconvenience. Unfortunately, you are not authorized to access this resource. Please <a href=\"/Login\">log in</a> or <a href=\"/Register\">register</a> and create a user account.</p>"
+            "Html": "<p class=\"text-center\">We apologize for your inconvenience. Unfortunately, you are not authorized to access this resource. Please <a href=\"/Login\">log in</a> or <a href=\"/Register\">register</a> and create a user account.</p>"
           },
           "TitlePart": {
             "Title": "Not Authorized"
+          }
+        },
+        {
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "Article",
+          "DisplayText": "Workflow Issue",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "Article": {
+            "Subtitle": {
+              "Text": "A Workflow issue has occured"
+            }
+          },
+          "AutoroutePart": {
+            "Path": "workflow-issue",
+            "SetHomepage": false,
+            "Disabled": false,
+            "RouteContainedItems": false,
+            "Absolute": false
+          },
+          "HtmlBodyPart": {
+            "Html": "<p class=\"text-center\">We apologize for your inconvenience. Unfortunately, A workflow issue has occured.</p>"
+          },
+          "TitlePart": {
+            "Title": "Workflow Issue"
           }
         },
         {
@@ -2540,6 +2567,22 @@
                   "Title": "Create Message Content Task"
                 }
               }
+            },
+            {
+              "ActivityId": "4tq0488kq7z7qwbdzj4s04vkwx",
+              "Name": "HttpRedirectTask",
+              "X": 1300,
+              "Y": 300,
+              "IsStart": false,
+              "Properties": {
+                "ActivityMetadata": {
+                  "Title": "Workflow Issue Redirect Task"
+                },
+                "Location": {
+                  "Expression": "/workflow-issue"
+                },
+                "Permanent": false
+              }
             }
           ],
           "Transitions": [
@@ -2625,7 +2668,7 @@
               "Id": 0,
               "SourceActivityId": "47j30tb53gecc2yqewbx3x8pn4",
               "SourceOutcomeName": "Failed",
-              "DestinationActivityId": "47j30tb53gecc2yqewbx3x8pn4"
+              "DestinationActivityId": "4tq0488kq7z7qwbdzj4s04vkwx"
             }
           ]
         },
@@ -2684,6 +2727,22 @@
                 },
                 "Permanent": false
               }
+            },
+            {
+              "ActivityId": "4ebab4y9jva4r1gecc32q0tvwd",
+              "Name": "HttpRedirectTask",
+              "X": 400,
+              "Y": 200,
+              "IsStart": false,
+              "Properties": {
+                "ActivityMetadata": {
+                  "Title": "Workflow Issue Redirect Task"
+                },
+                "Location": {
+                  "Expression": "/workflow-issue"
+                },
+                "Permanent": false
+              }
             }
           ],
           "Transitions": [
@@ -2698,10 +2757,16 @@
               "SourceActivityId": "4e1ap5cd1abqz1429c56fc3sd2",
               "SourceOutcomeName": "Done",
               "DestinationActivityId": "4p4yv9hyrmfvg4mbnyaz05whcx"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4e1ap5cd1abqz1429c56fc3sd2",
+              "SourceOutcomeName": "Failed",
+              "DestinationActivityId": "4ebab4y9jva4r1gecc32q0tvwd"
             }
           ]
         }
-       ]
+      ]
     },
     {
       "name": "Settings",
