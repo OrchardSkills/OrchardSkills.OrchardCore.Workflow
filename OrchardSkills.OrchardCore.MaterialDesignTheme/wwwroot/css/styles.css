@@ -59,7 +59,7 @@ label,
 .form-control {
   color: var(--lighter-text-color) !important;
 }
-input:-webkit-autofill,
+/* input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active,
@@ -75,7 +75,7 @@ select:-webkit-autofill:active {
   -webkit-text-fill-color: var(--font-color);
   
   transition: background-color 5000s ease-in-out 0s;
-}
+} */
 .form-label {
   background-color: var(--html-background) !important;
   padding: 0px 7px 0px 5px;
