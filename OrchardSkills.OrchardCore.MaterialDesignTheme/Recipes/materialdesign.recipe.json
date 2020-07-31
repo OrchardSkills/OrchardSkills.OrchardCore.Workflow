@@ -2780,18 +2780,6 @@
             },
             {
               "Id": 0,
-              "SourceActivityId": "4tq0488kq7z7qwbdzj4s04vkwx",
-              "SourceOutcomeName": "Done",
-              "DestinationActivityId": "4tq0488kq7z7qwbdzj4s04vkwx"
-            },
-            {
-              "Id": 0,
-              "SourceActivityId": "4kbg33s0s6v491sp4k2dpeymn2",
-              "SourceOutcomeName": "Done",
-              "DestinationActivityId": "4kbg33s0s6v491sp4k2dpeymn2"
-            },
-            {
-              "Id": 0,
               "SourceActivityId": "4hr22mvxwk0rex8khhkr9cnncp",
               "SourceOutcomeName": "Validate FullName",
               "DestinationActivityId": "4655jbn3247ksrt08a2b7r8yw9"
